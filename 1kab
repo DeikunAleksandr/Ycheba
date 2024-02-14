@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <math.h>
+#include <windows.h>
+
+int main() {
+    double a, b, c, x_1, x_2, d;
+    
+    printf("coef kvadratnogo uravneniia a, b and c: ");
+    scanf("%lf", &a);
+    scanf("%lf", &b);
+    scanf("%lf", &c);
+    
+    d = b * b - 4 * a * c;
+    printf("d=%.2f\n", d);
+    
+    if (d >= 0) {
+        x_1 = (-b + sqrt(d)) / (2 * a);
+        x_2 = (-b - sqrt(d)) / (2 * a);
+        
+        printf("Êîðåíü x1 = %.2f\n", x_1);
+        printf("Êîðåíü x2 = %.2f\n", x_2);
+    } else {
+        printf("error\n");
+    }
+    
+    return 0;
+}
