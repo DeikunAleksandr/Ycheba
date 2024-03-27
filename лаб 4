@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+//#include "zag.h"
+
+
+int main() {
+    SetConsoleOutputCP(CP_UTF8);
+    float a, b, c ;
+	
+	printf("Введите длину a: ");
+    	scanf("%f", &a);
+    printf("Введите длину b: ");
+    	scanf("%f", &b);
+    printf("Введите длину c: ");
+    	scanf("%f", &c);
+    	
+	 if (a + b > c && a + c > b && b + c > a) 
+{
+	printf("площадь %.2f\n", Pl(a, b, c)); 
+	printf("периметр %.2f\n", Pr(a, b, c));
+ 
+}
+	else 
+	{
+
+		printf("не существует‚ /n");
+	}
+return 0;	
+}	
