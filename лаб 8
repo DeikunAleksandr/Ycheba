@@ -1,0 +1,117 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
+#include <string.h>
+
+typedef struct {
+char name[50];
+int year;
+char gender[1];
+float height;
+} Person;
+
+
+int numFields;
+int fields[4];
+
+int compare(const void *a, const void *b) {
+Person *personA = (Person *)a;
+Person *personB = (Person *)b;
+int i;
+for (i = 0; i < numFields; i++) {
+switch (fields[i]) {
+case 1: {
+int comparison = strcmp(personA->name, personB->name);
+if (comparison != 0){
+return comparison;
+}
+break;
+}
+case 2: {
+if (personA->year != personB->year){
+return personA->year - personB->year;
+}
+break;
+}
+case 3: {
+int comparison = strcmp(personA->gender, personB->gender);
+if (comparison != 0){
+return comparison;
+}
+break;
+}
+case 4: {
+if (personA->height != personB->height){
+return (personA->height > personB->height) - (personA->height < personB->height);
+}
+break;
+}
+}
+}
+
+return 0;
+
+}
+
+int main() {
+SetConsoleOutputCP(CP_UTF8);
+FILE *input_file = fopen("input.txt", "r");
+if (input_file == NULL) {
+printf("Не удалось открыть файл\n");
+return 1;
+}
+
+Person people[100];
+int i = 0;
+
+while (fscanf(input_file, "%s %d %s %f", people[i].name, &people[i].year, people[i].gender, &people[i].height) != EOF) {
+i++;
+}
+
+fclose(input_file);
+
+
+int j;
+printf("Введите количество полей для сортировки: ");
+scanf("%d", &numFields);
+
+printf("Введите номера полей для сортировки (1 - имя, 2 - год рождения, 3 - пол, 4 - рост): \n");
+for (j = 0; j < numFields; j++) {
+scanf("%d", &fields[j]);
+}
+
+qsort(people, i, sizeof(Person), compare);
+
+
+for(j = 0; j < i; j++) {
+printf("%s, %d, %s, %.2f\n", people[j].name, people[j].year, people[j].gender, people[j].height);
+}
+
+return 0;
+}
+
+/* printf("Введите поля для сортировки через пробел (name, year, gender, height): ");
+fgets(field, 50, stdin);
+printf("%s", field);
+char *token;
+char *field_arr[4];
+int k = 0;
+token = strtok(field, " ");
+while(token != NULL){
+field_arr[k++] = token;
+token = strtok(NULL, " ");
+}
+
+int j;
+for(j=0;j<k; j++) {
+printf(" %s\n", field_arr[j]);
+}*/
+8 input.txt
+Андрей 1977 М 1.85
+Василий 1983 М 1.66
+Алиса 1999 Ж 1.56
+Игорь 2005 М 1.85
+Алиса 2005 Ж 1.59
+Анастасия 2003 Ж 1.77
+Анастасия 2007 Ж 1.54
